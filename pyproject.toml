@@ -8,6 +8,12 @@ authors = ["Ansima"]
 python = "3.10.6"
 fastapi = "^0.95.1"
 uvicorn = {extras = ["standard"], version = "^0.22.0"}
+SQLAlchemy = "^1.4.39"
+databases = "^0.7.0"
+python-dotenv = "^1.0.0"
+asyncpg = "^0.27.0"
+alembic = "^1.10.4"
+greenlet = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.3.1"

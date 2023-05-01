@@ -1,12 +1,21 @@
 import uvicorn
 from fastapi import FastAPI
 
+from core import init_db
+from .api import api_router
+
 app = FastAPI()
+
+app.include_router(api_router)
 
 
 @app.get("/")
 async def main_route():
     return {"message": "Hi"}
+
+@app.on_event("startup")
+async def startup():
+    await init_db()
 
 
 if __name__ == "__main__":
