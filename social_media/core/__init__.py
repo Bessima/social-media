@@ -1,4 +1,4 @@
-from .database import init_db, get_session, Base
+from .database import Base, get_session, init_db
 
 __all__ = [
     'init_db',

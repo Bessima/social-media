@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 
-from social_media.tables import Base, User
+from social_media.tables import Base
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
