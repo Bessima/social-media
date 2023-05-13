@@ -3,10 +3,13 @@ from core import init_db
 from fastapi import FastAPI
 
 from social_media.api import api_router
+from social_media.core.middlewares import AppExceptionMiddleware
 
 app = FastAPI()
 
 app.include_router(api_router)
+
+app.add_middleware(AppExceptionMiddleware)
 
 
 @app.get("/")

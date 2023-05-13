@@ -1,5 +1,6 @@
 from social_media.tables import User
 
+from ..tables.schemas import UserCreateSchema
 from .base import BaseRepository
 
 
@@ -9,7 +10,7 @@ class UserRepository(BaseRepository):
     def update(self, id_: int, represent: User) -> User:
         pass
 
-    async def create(self, represent: User) -> User:
+    async def create(self, represent: UserCreateSchema) -> User:
         user = self.model(**represent.dict())
         user.set_password(user.password)
 

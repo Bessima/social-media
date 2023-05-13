@@ -1,9 +1,11 @@
+from uuid import UUID
+
 from pydantic import BaseModel
 
 from social_media.tables.enums import Gender
 
 
-class UserSchema(BaseModel):
+class UserCreateSchema(BaseModel):
     first_name: str
     second_name: str
     age: int
@@ -14,5 +16,5 @@ class UserSchema(BaseModel):
 
 
 class UserLoginSchema(BaseModel):
-    user_id: str
+    user_id: UUID
     password: str

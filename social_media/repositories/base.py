@@ -32,10 +32,10 @@ class BaseRepository(ABC):
 
         return elem
 
-    async def get(self, id_: UUID) -> BaseModel or None:
+    async def get(self, id_: str) -> BaseModel or None:
         query = select(self.model).filter(self.model.id == id_)
         elems = await self.session.execute(query)
-        return elems.first()
+        return elems.scalar()
 
     async def get_by_field(self, name: str, value: str) -> BaseModel or None:
         query = select(self.model).filter(getattr(self.model, name) == value)

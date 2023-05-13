@@ -7,7 +7,6 @@ from sqlalchemy.sql import func
 
 from social_media.core import Base
 
-from ..core.settings import config
 from .enums import Gender
 
 
