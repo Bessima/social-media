@@ -18,3 +18,15 @@ class UserCreateSchema(BaseModel):
 class UserLoginSchema(BaseModel):
     user_id: UUID
     password: str
+
+
+class UserResponse(BaseModel):
+    first_name: str
+    second_name: str
+    age: int
+    gender: Gender
+    hobby: str
+    city: str
+
+    class Config:
+        orm_mode = True

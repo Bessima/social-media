@@ -12,11 +12,16 @@ class UserValidator:
         self.repository = repository
 
     async def validate(self, user_schema: UserLoginSchema) -> User:
-        user = await self.repository.get(str(user_schema.user_id))
-        if user is None:
-            raise NotFoundException("Анкета не найдена")
+        user = await self.validate_user_id(str(user_schema.user_id))
 
         if not user.check_password(user_schema.password):
             raise BadRequestException("Невалидные данные")
+
+        return user
+
+    async def validate_user_id(self, user_id: str) -> User:
+        user = await self.repository.get(user_id)
+        if user is None:
+            raise NotFoundException("Анкета не найдена")
 
         return user

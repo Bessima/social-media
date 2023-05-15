@@ -1,40 +1,19 @@
-import time
 from typing import TYPE_CHECKING
 
-import jwt
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import JSONResponse
 
 from social_media.core import get_session
-from social_media.core.settings import config
+from social_media.core.auth import JWTBearer, sign_jwt
 from social_media.repositories import UserRepository
-from social_media.tables.schemas import UserCreateSchema, UserLoginSchema
+from social_media.tables.schemas import UserCreateSchema, UserLoginSchema, UserResponse
 from social_media.validators import UserValidator
 
 if TYPE_CHECKING:
     from social_media.tables import User
 
 router = APIRouter()
-
-
-def token_response(token: str):
-    return {"access_token": token}
-
-
-def sign_jwt(user_id: str) -> dict[str, str]:
-    payload = {"user_id": user_id, "expires": time.time() + 600}
-    token = jwt.encode(payload, config.JWT_SECRET, algorithm=config.JWT_ALGORITHM)
-
-    return token_response(token)
-
-
-def decode_jwt(token: str) -> dict:
-    try:
-        decoded_token = jwt.decode(token, config.JWT_SECRET, algorithms=[config.JWT_ALGORITHM])
-        return decoded_token if decoded_token["expires"] >= time.time() else None
-    except:
-        return {}
 
 
 @router.post("/user/register")
@@ -55,6 +34,9 @@ async def login(user_schema: UserLoginSchema, session: 'AsyncSession' = Depends(
     return JSONResponse(content=sign_jwt(str(user_schema.user_id)))
 
 
-@router.get("/user/get/{id}")
-async def get_user(id):
-    pass
+@router.get("/user/get/{id}", dependencies=[Depends(JWTBearer())])
+async def get_user(id: str, session: 'AsyncSession' = Depends(get_session)):
+    validator = UserValidator(repository=UserRepository(session))
+    user = await validator.validate_user_id(id)
+
+    return UserResponse.from_orm(user)
