@@ -1,6 +1,7 @@
 import uvicorn
 from core import init_db
 from fastapi import FastAPI
+from starlette.responses import HTMLResponse
 
 from social_media.api import api_router
 from social_media.core.middlewares import AppExceptionMiddleware
@@ -14,7 +15,7 @@ app.add_middleware(AppExceptionMiddleware)
 
 @app.get("/")
 async def main_route():
-    return {"message": "Hi"}
+    return HTMLResponse("Hi, go to <a href='/docs'>Swagger Docs</a>")
 
 
 @app.on_event("startup")
