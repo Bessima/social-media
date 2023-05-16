@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "504a0758-dfd9-480b-9ff8-0bc0e30f8e95",
+		"name": "SocialMedia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12702367"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\": \"Test\",\n  \"second_name\": \"Test\",\n  \"age\": 20,\n  \"gender\": \"male\",\n  \"hobby\": \"Some hobbies\",\n  \"city\": \"City\",\n  \"password\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/user/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": \"a3303bc8-0624-40d5-a74e-3bd73846a4a0\",\n  \"password\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTMzMDNiYzgtMDYyNC00MGQ1LWE3NGUtM2JkNzM4NDZhNGEwIiwiZXhwaXJlcyI6MTY4NDI2NDk1OC4yMzY4NjcyfQ.wvyolURzc232hlRbWdyFeYYtYV2LwS3VoURX6u49VpE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/user/get/a3303bc8-0624-40d5-a74e-3bd73846a4a0",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user",
+						"get",
+						"a3303bc8-0624-40d5-a74e-3bd73846a4a0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://0.0.0.0:8000",
+			"type": "string"
+		}
+	]
+}
