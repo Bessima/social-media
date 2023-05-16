@@ -21,7 +21,7 @@ poetry install
 
 ### Create DB PostgreSQL
 
-Postgres must be in installed. Runs create_db.sql script.
+Postgres must be installed. Runs create_db.sql script.
 
 `psql -f preparation/create_db.sql`
 
