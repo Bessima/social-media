@@ -7,7 +7,7 @@ from starlette.responses import JSONResponse
 from social_media.core import get_session
 from social_media.core.auth import JWTBearer, sign_jwt
 from social_media.repositories import UserRepository
-from social_media.tables.schemas import UserCreateSchema, UserLoginSchema, UserResponse
+from social_media.tables.schemas import UserCreateSchema, UserLoginSchema, UserResponse, Users
 from social_media.validators import UserValidator
 
 if TYPE_CHECKING:
@@ -40,3 +40,15 @@ async def get_user(id: str, session: 'AsyncSession' = Depends(get_session)):
     user = await validator.validate_user_id(id)
 
     return UserResponse.from_orm(user)
+
+
+@router.get("/user/search")
+async def get_user(
+    first_name: str, last_name: str, session: 'AsyncSession' = Depends(get_session)
+):
+    users = await UserRepository(session).get_like_by_name_and_surname(
+        first_name=first_name,
+        second_name=last_name,
+    )
+
+    return Users(users=users)

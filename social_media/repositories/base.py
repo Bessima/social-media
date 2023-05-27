@@ -37,10 +37,10 @@ class BaseRepository(ABC):
         elems = await self.session.execute(query)
         return elems.scalar()
 
-    async def get_by_field(self, name: str, value: str) -> BaseModel or None:
-        query = select(self.model).filter(getattr(self.model, name) == value)
+    async def get_by_fields(self, **kwargs) -> []:
+        query = select(self.model).filter_by(**kwargs)
         elems = await self.session.execute(query)
-        return elems.first()
+        return elems.scalars().all()
 
     async def get_list(self) -> List[Base]:
         query = await self.session.execute(select(self.model))
