@@ -29,6 +29,16 @@ class BaseRepository(ABC):
         except Exception:
             await self.session.rollback()
             raise
+        return elem
+
+    async def set_bulk(self, items: list[BaseModel]) -> Base:
+        elem = self.model(**items.dict())
+        try:
+            self.session.add(elem)
+            await self.session.commit()
+        except Exception:
+            await self.session.rollback()
+            raise
 
         return elem
 
