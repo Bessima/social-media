@@ -6,6 +6,7 @@ class AppSettings(pydantic.BaseSettings):
     JWT_ALGORITHM: str
 
     DATABASE_URL: str
+    DATABASE_READ_URL: str
 
     class Config:
         env_file = '.env'

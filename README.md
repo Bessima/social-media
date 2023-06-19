@@ -33,8 +33,9 @@ Postgres must be installed. Runs create_db.sql script.
 
 Copy .env.example as .env file and change parameters values
 
-| params         | description   |
-|----------------|---------------|
-| DATABASE_URL   | Path to DB    |
-| JWT_SECRET     | jwt secret    |
-| JWT_ALGORITHM  | jwt algorithm |
+| params            | description               |
+|-------------------|---------------------------|
+| DATABASE_URL      | Path to DB                |
+| DATABASE_READ_URL | Path to read data from DB |
+| JWT_SECRET        | jwt secret                |
+| JWT_ALGORITHM     | jwt algorithm             |

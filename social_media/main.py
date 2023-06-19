@@ -1,9 +1,9 @@
 import uvicorn
-from core import init_db
 from fastapi import FastAPI
 from starlette.responses import HTMLResponse
 
 from social_media.api import api_router
+from social_media.core import init_db
 from social_media.core.middlewares import AppExceptionMiddleware
 
 app = FastAPI()
