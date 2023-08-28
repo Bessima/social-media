@@ -3,6 +3,7 @@ from typing import List
 from uuid import UUID
 
 from pydantic import BaseModel
+from sqlalchemy import and_, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
@@ -17,7 +18,6 @@ class BaseRepository(ABC):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    @abstractmethod
     async def update(self, id_: UUID, represent: BaseModel) -> Base:
         pass
 
@@ -56,11 +56,13 @@ class BaseRepository(ABC):
         query = await self.session.execute(select(self.model))
         return query.scalars().all()
 
-    async def delete(self, id_: UUID):
-        query = select(self.model).filter(self.model.id == id_).delete()
+    async def delete(self, **kwargs):
+        params = and_(
+            getattr(self.model, field_name) == str(value) for field_name, value in kwargs.items()
+        )
+        query = delete(self.model).where(params)
         await self.session.execute(query)
         await self.session.commit()
-        return True
 
     async def _record_object(self, model: Base):
         """Запись объекта в модель."""

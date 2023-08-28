@@ -35,7 +35,7 @@ async def login(user_schema: UserLoginSchema, session: 'AsyncSession' = Depends(
 
 
 @router.get("/user/get/{id}")
-async def get_user(id: str, session: 'AsyncSession' = Depends(get_read_session)):
+async def get_user(id: str, session: 'AsyncSession' = Depends(get_session)):
     validator = UserValidator(repository=UserRepository(session))
     user = await validator.validate_user_id(id)
 
@@ -44,7 +44,7 @@ async def get_user(id: str, session: 'AsyncSession' = Depends(get_read_session))
 
 @router.get("/user/search")
 async def get_user(
-    first_name: str, last_name: str, session: 'AsyncSession' = Depends(get_read_session)
+    first_name: str, last_name: str, session: 'AsyncSession' = Depends(get_session)
 ):
     users = await UserRepository(session).get_like_by_name_and_surname(
         first_name=first_name,

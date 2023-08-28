@@ -27,6 +27,11 @@ def decode_jwt(token: str) -> dict:
         return {}
 
 
+def get_user_id(token: str) -> str:
+    if decoded_token := decode_jwt(token):
+        return decoded_token["user_id"]
+
+
 class JWTBearer(HTTPBearer):
     def __init__(self, auto_error: bool = True):
         super(JWTBearer, self).__init__(auto_error=auto_error)

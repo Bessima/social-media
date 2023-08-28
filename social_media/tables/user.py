@@ -1,5 +1,3 @@
-import uuid
-
 import bcrypt as bcrypt
 from sqlalchemy import Column, DateTime, Enum, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
@@ -8,10 +6,7 @@ from sqlalchemy.sql import func
 from social_media.core import Base
 
 from .enums import Gender
-
-
-def create_uuid() -> str:
-    return str(uuid.uuid4())
+from .utils import create_uuid
 
 
 class User(Base):
