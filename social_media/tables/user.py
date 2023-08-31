@@ -1,6 +1,7 @@
 import bcrypt as bcrypt
 from sqlalchemy import Column, DateTime, Enum, Integer, String, Text
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
 from social_media.core import Base
@@ -22,6 +23,8 @@ class User(Base):
     password = Column(String, nullable=False)
 
     time_created = Column(DateTime(timezone=True), server_default=func.now())
+
+    posts = relationship("Post", back_populates="author")
 
     def set_password(self, value):
         self.password = bcrypt.hashpw(value.encode('utf-8'), bcrypt.gensalt()).decode()

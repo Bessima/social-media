@@ -29,7 +29,7 @@ def decode_jwt(token: str) -> dict:
 
 def get_user_id(token: str) -> str:
     if decoded_token := decode_jwt(token):
-        return decoded_token["user_id"]
+        return str(decoded_token["user_id"])
 
 
 class JWTBearer(HTTPBearer):

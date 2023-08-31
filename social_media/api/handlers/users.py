@@ -4,8 +4,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import JSONResponse
 
-from social_media.core import get_read_session, get_session
-from social_media.core.auth import JWTBearer, sign_jwt
+from social_media.core import get_session
+from social_media.core.auth import sign_jwt
 from social_media.repositories import UserRepository
 from social_media.tables.schemas import UserCreateSchema, UserLoginSchema, UserResponse, Users
 from social_media.validators import UserValidator

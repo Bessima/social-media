@@ -1,4 +1,6 @@
 from social_media.validators.friends import FriendValidator
 from social_media.validators.users import UserValidator
 
-__all__ = ['UserValidator', 'FriendValidator']
+from .posts import PostValidator
+
+__all__ = ['UserValidator', 'FriendValidator', 'PostValidator']
