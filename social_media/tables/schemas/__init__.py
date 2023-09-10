@@ -1,4 +1,4 @@
-from .post import PostFullSchema, PostSchema
+from .post import FeedForUserResponse, PostFullSchema, PostSchema
 from .user import UserCreateSchema, UserLoginSchema, UserResponse, Users
 
 __all__ = [
@@ -8,4 +8,5 @@ __all__ = [
     'Users',
     'PostFullSchema',
     'PostSchema',
+    'FeedForUserResponse',
 ]

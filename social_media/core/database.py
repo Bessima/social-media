@@ -17,7 +17,7 @@ database = databases.Database(DATABASE_URL)
 database_read = databases.Database(DATABASE_READ_URL)
 
 engine = create_async_engine(DATABASE_URL)
-engine_read = create_async_engine(DATABASE_READ_URL)
+# engine_read = create_async_engine(DATABASE_READ_URL)
 
 metadata = MetaData()
 
@@ -28,8 +28,8 @@ async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
-    async with engine_read.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    # async with engine_read.begin() as conn:
+    #     await conn.run_sync(Base.metadata.create_all)
 
 
 async def get_session() -> AsyncSession:
@@ -39,6 +39,7 @@ async def get_session() -> AsyncSession:
 
 
 async def get_read_session() -> AsyncSession:
-    async_session = sessionmaker(engine_read, class_=AsyncSession, expire_on_commit=False)
-    async with async_session() as session:
-        yield session
+    pass
+    # async_session = sessionmaker(engine_read, class_=AsyncSession, expire_on_commit=False)
+    # async with async_session() as session:
+    #     yield session

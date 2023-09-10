@@ -10,3 +10,7 @@ class PostSchema(BaseModel):
 
 class PostFullSchema(PostSchema):
     author_id: str
+
+
+class FeedForUserResponse(BaseModel):
+    posts: list[PostFullSchema]
