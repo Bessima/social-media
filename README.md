@@ -39,3 +39,4 @@ Copy .env.example as .env file and change parameters values
 | DATABASE_READ_URL | Path to read data from DB |
 | JWT_SECRET        | jwt secret                |
 | JWT_ALGORITHM     | jwt algorithm             |
+| REDIS_URL         | redis url                 |
