@@ -29,6 +29,11 @@ Postgres must be installed. Runs create_db.sql script.
 
 `python ./social_media/main.py`
 
+### Linters
+
+`python -m isort .`
+`python -m black .`
+
 ### Env Parameters
 
 Copy .env.example as .env file and change parameters values
