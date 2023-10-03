@@ -29,6 +29,10 @@ Postgres must be installed. Runs create_db.sql script.
 
 `python ./social_media/main.py`
 
+### Running via docker-compose
+
+`POSTGRES_PASSWORD=pass docker-compose -p citus up --scale worker=2 -d`
+
 ### Linters
 
 `python -m isort .`

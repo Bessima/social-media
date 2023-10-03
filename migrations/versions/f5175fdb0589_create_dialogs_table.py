@@ -39,6 +39,9 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint('user_id', 'opponent_id', 'created_at'),
     )
 
+    op.execute("SELECT create_reference_table('users');")
+    op.execute("SELECT create_distributed_table('dialogs', 'user_id');")
+
 
 def downgrade() -> None:
     op.drop_table('dialogs')
